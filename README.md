@@ -11,7 +11,10 @@ npm run build    # production build in dist/
 ## Content — one file
 
 All content lives in `src/data/profile.ts`. Sections are shown **only when they have data**, and the navigation and
-section numbers adjust to match. Right now that's About, Education and Contact.
+section numbers adjust to match.
+
+Projects come from [github.com/anitikaaronmaharana](https://github.com/anitikaaronmaharana). The screenshots in
+`public/projects/` were captured from the live GitHub Pages demos, and `archive` lists all 44 public repos.
 
 To add more, fill the matching array and the section appears automatically:
 
@@ -30,7 +33,7 @@ Only add facts that can be backed up: a project, certificate, course or confirme
 
 | File | Status |
 | --- | --- |
-| `public/headshot.webp` + `.jpg` | Not added yet. Until it exists, the hero shows an "AM" monogram. Use a square image of at least 800 px. |
+| `public/headshot.webp` + `.jpg` | Cropped from his 400×400 profile photo, with headroom added above. A higher-resolution square headshot would look sharper. |
 | `public/resume.pdf` | Not added yet. Once it exists, the Resume buttons link to it automatically; until then they open LinkedIn. |
 
 ## Options

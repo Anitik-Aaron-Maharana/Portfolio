@@ -1,7 +1,7 @@
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
-import { ArrowUpRight, BookOpen, CheckCircle2, ExternalLink, Lightbulb, Target } from 'lucide-react'
+import { ArrowUpRight, BookOpen, CheckCircle2, Gamepad2, Lightbulb, Play, Target } from 'lucide-react'
 import { useState } from 'react'
-import { projects, skills, type Project } from '../data/profile'
+import { archive, GITHUB_URL, projects, skills, type Project } from '../data/profile'
 import { useSkillFocus } from '../hooks/SkillFocus'
 import { GitHubIcon } from './ui/Icons'
 import { Modal } from './ui/Modal'
@@ -11,7 +11,13 @@ import { Section } from './ui/Section'
 import { SourceTag } from './ui/SourceTag'
 
 const Visual = ({ p, className }: { p: Project; className?: string }) =>
-  p.visual === 'lane' ? <LaneVisual className={className} /> : <StockVisual className={className} />
+  p.image ? (
+    <img src={p.image} alt={p.imageAlt ?? `${p.title} screenshot`} loading="lazy" decoding="async" className={`${className} object-cover object-top`} />
+  ) : p.visual === 'lane' ? (
+    <LaneVisual className={className} />
+  ) : (
+    <StockVisual className={className} />
+  )
 
 function ProjectCard({ p, index, onOpen }: { p: Project; index: number; onOpen: () => void }) {
   const reduce = useReducedMotion()
@@ -102,7 +108,7 @@ function ProjectCard({ p, index, onOpen }: { p: Project; index: number; onOpen: 
             )}
             {p.demo && (
               <a href={p.demo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 rounded-full hairline px-5 text-sm text-mist hover:border-cyan/50">
-                <ExternalLink size={15} aria-hidden /> Live demo
+                <Play size={15} aria-hidden /> Play live
               </a>
             )}
           </div>
@@ -122,10 +128,10 @@ export function Projects() {
       eyebrow="Selected work"
       title={
         <>
-          Projects that <span className="text-gradient">think.</span>
+          Games you can <span className="text-gradient">actually play.</span>
         </>
       }
-      intro="Two builds at the intersection of perception, prediction and software. Visuals are illustrative artwork, not product screenshots."
+      intro="Browser games from his GitHub, built with JavaScript, p5.js, Matter.js physics and Firebase. Each one is playable online, and the screenshots are taken from the live demos."
     >
       <div className="space-y-8">
         {projects.map((p, i) => (
@@ -133,11 +139,53 @@ export function Projects() {
         ))}
       </div>
 
+      {archive.length > 0 && (
+        <div className="mt-20">
+          <Reveal>
+            <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="eyebrow flex items-center gap-2">
+                  <Gamepad2 size={14} aria-hidden /> The full archive
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold text-white md:text-3xl">{archive.length} games & apps on GitHub</h3>
+                <p className="mt-2 max-w-xl text-slate">Everything public, newest first. Most open straight in the browser.</p>
+              </div>
+              <a
+                href={`${GITHUB_URL}?tab=repositories`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center gap-2 self-start rounded-full hairline px-5 text-sm text-mist transition hover:border-cyan/50 hover:text-white md:self-auto"
+              >
+                <GitHubIcon className="h-4 w-4" /> All repositories <ArrowUpRight size={14} aria-hidden />
+              </a>
+            </div>
+          </Reveal>
+          <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {archive.map((a) => (
+              <li key={a.repo} className="group flex items-center gap-3 rounded-xl border border-azure/10 bg-ink-850/40 px-4 py-3 transition hover:border-cyan/40 hover:bg-ink-850/80">
+                <span className="w-10 shrink-0 font-mono text-[11px] text-muted">{a.year}</span>
+                <span className="min-w-0 flex-1 truncate text-sm text-mist group-hover:text-white">{a.name}</span>
+                {a.live ? (
+                  <a href={a.live} target="_blank" rel="noopener noreferrer" aria-label={`Play ${a.name}`} className="grid h-8 w-8 place-items-center rounded-full text-cyan transition hover:bg-royal/30">
+                    <Play size={14} aria-hidden />
+                  </a>
+                ) : (
+                  a.note && <span className="font-mono text-[10px] uppercase text-muted">{a.note}</span>
+                )}
+                <a href={a.repo} target="_blank" rel="noopener noreferrer" aria-label={`${a.name} source on GitHub`} className="grid h-8 w-8 place-items-center rounded-full text-slate transition hover:bg-royal/30 hover:text-white">
+                  <GitHubIcon className="h-3.5 w-3.5" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <Modal open={!!open} onClose={() => setOpen(null)} labelledBy="case-study-title">
         {open && (
           <article>
             <div className="relative aspect-[16/9] overflow-hidden rounded-t-3xl">
-              <Visual p={open} className="h-full w-full" />
+              <Visual p={open} className="h-full w-full bg-ink-950" />
               <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/10 to-transparent" />
             </div>
             <div className="-mt-16 relative p-6 sm:p-10">
@@ -173,7 +221,7 @@ export function Projects() {
                 ))}
               </ul>
 
-              <h4 className="mt-8 text-lg font-semibold text-white">Domain</h4>
+              <h4 className="mt-8 text-lg font-semibold text-white">Built with</h4>
               <div className="mt-3 flex flex-wrap gap-2">
                 {open.technologies.map((t) => (
                   <span key={t} className="rounded-full bg-royal/20 px-3 py-1 text-sm text-ice ring-1 ring-azure/20">
@@ -182,10 +230,25 @@ export function Projects() {
                 ))}
               </div>
 
-              <p className="mt-8 rounded-xl border border-dashed border-azure/20 p-4 text-sm text-muted">
-                Implementation details (stack, dataset, metrics) and repository links will be added once published — nothing here is
-                assumed.
-              </p>
+              {open.demo || open.repo ? (
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {open.demo && (
+                    <a href={open.demo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-gradient-to-r from-royal to-electric px-6 text-sm text-white">
+                      <Play size={15} aria-hidden /> Play it live
+                    </a>
+                  )}
+                  {open.repo && (
+                    <a href={open.repo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 rounded-full hairline px-6 text-sm text-mist hover:border-cyan/50">
+                      <GitHubIcon className="h-4 w-4" /> View source
+                    </a>
+                  )}
+                </div>
+              ) : (
+                <p className="mt-8 rounded-xl border border-dashed border-azure/20 p-4 text-sm text-muted">
+                  Implementation details and repository links will be added once published.
+                </p>
+              )}
+              {open.demo && <p className="mt-3 text-xs text-muted">Tip: click the game once to start it. Browsers need a click before playing sound.</p>}
             </div>
           </article>
         )}

@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { BrainCircuit, Check, GraduationCap } from 'lucide-react'
+import { BookOpen, BrainCircuit, Check, GraduationCap, School, Users } from 'lucide-react'
 import { education } from '../data/profile'
 import { Reveal } from './ui/Reveal'
 import { Section } from './ui/Section'
@@ -17,13 +17,27 @@ export function Education() {
           <div className="relative overflow-hidden rounded-3xl border border-azure/15 bg-gradient-to-br from-royal/25 via-ink-850/70 to-ink-900 p-8">
             <div aria-hidden className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-electric/25 blur-3xl" />
             <GraduationCap size={30} className="relative text-cyan" aria-hidden />
-            <p className="relative mt-6 font-mono text-sm text-cyan">Expected graduation · {education.graduation}</p>
+            <p className="relative mt-6 font-mono text-sm text-cyan">{education.period}</p>
             <h3 className="relative mt-2 text-3xl font-semibold leading-tight text-white">{education.school}</h3>
             <p className="relative mt-3 text-mist">{education.degree}</p>
             <p className="relative mt-1 text-slate">{education.branch}</p>
             <div className="relative mt-5 inline-flex items-start gap-2 rounded-2xl bg-royal/20 px-3 py-2 text-sm text-ice ring-1 ring-azure/25">
               <BrainCircuit size={15} className="mt-0.5 shrink-0 text-cyan" aria-hidden /> Specialisation: {education.specialization}
             </div>
+            {education.activities.length > 0 && (
+              <div className="relative mt-5">
+                <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-muted">
+                  <Users size={13} className="text-cyan" aria-hidden /> Activities & societies
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {education.activities.map((a) => (
+                    <span key={a} className="rounded-md bg-ink-900/60 px-2 py-1 text-xs text-ice ring-1 ring-azure/20">
+                      {a}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="relative mt-8 grid grid-cols-3 gap-3 border-t border-azure/15 pt-6 text-center">
               {[
                 ['Year', education.yearOfStudy],
@@ -104,6 +118,32 @@ export function Education() {
           </Reveal>
         </div>
       </div>
+      {education.earlier.length > 0 && (
+        <div className="mt-20">
+          <Reveal>
+            <p className="eyebrow mb-6 flex items-center gap-2">
+              <BookOpen size={14} aria-hidden /> Earlier education & training
+            </p>
+          </Reveal>
+          <ul className="grid gap-4 md:grid-cols-3">
+            {education.earlier.map((e, i) => (
+              <li key={e.school}>
+                <Reveal delay={i * 0.06} className="h-full">
+                  <div className="surface glow-ring flex h-full flex-col rounded-2xl p-6">
+                    <div className="flex items-center justify-between gap-3">
+                      <School size={18} className="text-cyan" aria-hidden />
+                      <span className="font-mono text-xs text-muted">{e.period}</span>
+                    </div>
+                    <h3 className="mt-4 text-lg font-semibold text-white">{e.school}</h3>
+                    <p className="mt-1 text-sm text-ice">{e.level}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-slate">{e.detail}</p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </Section>
   )
 }

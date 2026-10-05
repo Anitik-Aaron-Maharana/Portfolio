@@ -4,6 +4,7 @@ const meta: Record<Source, { label: string; title: string; dot: string }> = {
   profile: { label: 'LinkedIn profile', title: 'Listed on the LinkedIn profile', dot: 'bg-cyan' },
   activity: { label: 'LinkedIn activity', title: 'Referenced in LinkedIn posts / activity', dot: 'bg-azure/60' },
   certificate: { label: 'Certificate', title: 'Backed by an issued certificate document', dot: 'bg-ice' },
+  github: { label: 'GitHub', title: 'Read from his public GitHub repository', dot: 'bg-emerald-400' },
 }
 
 export function SourceTag({ source, className = '' }: { source: Source; className?: string }) {

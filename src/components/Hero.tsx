@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, BookOpen, BrainCircuit, Code2, GraduationCap, MapPin } from 'lucide-react'
+import { ArrowRight, BookOpen, BrainCircuit, Code2, Gamepad2, GraduationCap, MapPin, Music } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { isVisible, links, person } from '../data/profile'
 import { Particles, Streaks } from './Ambient'
@@ -65,7 +65,7 @@ export function ProfilePhoto({ className = '' }: { className?: string }) {
   )
 }
 
-const chipIcons = { brain: BrainCircuit, code: Code2, book: BookOpen, cap: GraduationCap }
+const chipIcons = { brain: BrainCircuit, code: Code2, book: BookOpen, cap: GraduationCap, game: Gamepad2, music: Music }
 const chipPos = [
   { pos: 'right-[-10%] top-[6%]', delay: 1.2 },
   { pos: 'left-[-6%] top-[14%]', delay: 0 },
@@ -190,7 +190,7 @@ export function Hero() {
               <span aria-hidden className="block">
                 <RotatingRole />
               </span>
-              <span className="mt-1 block text-slate">Specialising in artificial intelligence &amp; machine learning.</span>
+              <span className="mt-1 block text-slate">{person.tagline}</span>
             </p>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate lg:mx-0">{person.intro}</p>
 

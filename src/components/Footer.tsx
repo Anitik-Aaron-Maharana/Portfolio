@@ -18,7 +18,7 @@ export function Footer({ resumeExists }: { resumeExists: boolean }) {
           <p className="font-display text-2xl font-semibold text-white">
             {first}<span className="text-cyan"> {rest.join(' ')}</span>
           </p>
-          <p className="mt-2 max-w-sm text-slate">Third-year B.Tech CSE student specialising in Artificial Intelligence and Machine Learning at SMIT.</p>
+          <p className="mt-2 max-w-sm text-slate">Coder, game developer and multi-instrumentalist. B.Tech CSE (AI & ML) at SMIT.</p>
         </div>
         <nav aria-label="Footer">
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">

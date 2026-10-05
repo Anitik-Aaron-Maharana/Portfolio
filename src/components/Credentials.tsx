@@ -9,7 +9,7 @@ import { Section } from './ui/Section'
 import { SourceTag } from './ui/SourceTag'
 
 type Filter = 'All' | CertCategory
-const order: CertCategory[] = ['AI/ML', 'Programming', 'Data', 'Blockchain', 'Participation']
+const order: CertCategory[] = ['AI/ML', 'Programming', 'Game Dev', 'Music', 'Awards', 'Participation']
 // A filter only appears when at least one certificate exists in that category.
 const filters: Filter[] = ['All', ...order.filter((c) => certificates.some((x) => x.category === c))]
 const sorted = [...certificates].sort((a, b) => b.sortKey - a.sortKey)
@@ -74,7 +74,7 @@ export function Credentials() {
           Certificates & <span className="text-gradient">Credentials</span>
         </>
       }
-      intro="Courses, training and participation, each backed by the issued certificate. Only credentials with a working verification link on the issuer’s site get the verified badge. Internship certificates appear under Experience."
+      intro="Programming, AI, music and awards, each backed by the issued certificate. Only credentials with a working verification link on the issuer’s site get the verified badge. Internship certificates appear under Experience."
       aside={
         <div className="flex gap-3">
           <div className="rounded-2xl hairline bg-ink-850/60 px-5 py-3">

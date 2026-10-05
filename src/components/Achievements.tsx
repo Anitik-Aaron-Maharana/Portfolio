@@ -1,13 +1,14 @@
 import { Award, BadgeCheck, Flag, Trophy, Users } from 'lucide-react'
-import { activities, certificates } from '../data/profile'
+import { activities, certificates, memberships } from '../data/profile'
+import { DocThumbs } from './ui/DocViewer'
 import { Reveal } from './ui/Reveal'
 import { Section } from './ui/Section'
 import { SourceTag } from './ui/SourceTag'
 
 const groups = [
-  { key: 'hackathon', title: 'Hackathons & Events', icon: Trophy },
-  { key: 'program', title: 'Programs & Leadership', icon: Flag },
-  { key: 'community', title: 'Community & Workshops', icon: Users },
+  { key: 'hackathon', title: 'Events & Programmes', icon: Flag },
+  { key: 'program', title: 'Awards & Recognition', icon: Trophy },
+  { key: 'community', title: 'Clubs & Community', icon: Users },
 ] as const
 
 export function Achievements() {
@@ -21,7 +22,7 @@ export function Achievements() {
           Showing up, <span className="text-gradient">on and off the keyboard.</span>
         </>
       }
-      intro="Participation is listed as participation — no ranks, prizes or outcomes are claimed unless published."
+      intro="Awards and roles are described exactly as their certificates state them, and participation is listed as participation."
     >
       <div className="grid gap-6 lg:grid-cols-4">
         <Reveal className="lg:col-span-1">
@@ -70,6 +71,7 @@ export function Achievements() {
                     </li>
                   ))}
               </ul>
+              {g.key === 'community' && memberships.length > 0 && <DocThumbs docs={memberships} label="Membership" />}
             </div>
           </Reveal>
         ))}

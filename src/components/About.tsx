@@ -1,7 +1,7 @@
 import { animate, useInView, useReducedMotion } from 'framer-motion'
-import { BookOpen, BrainCircuit, GraduationCap, MapPin, School } from 'lucide-react'
+import { BrainCircuit, GraduationCap, Languages, MapPin, Music, Quote } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { education, person } from '../data/profile'
+import { archive, certificates, education, experience, person } from '../data/profile'
 import { Reveal } from './ui/Reveal'
 import { Section } from './ui/Section'
 
@@ -18,21 +18,21 @@ function Counter({ to }: { to: number }) {
   return <span ref={ref}>{val}</span>
 }
 
-// Every stat comes straight from the academic details — nothing is estimated.
+// Every stat is counted from the data file.
 const stats = [
-  { value: education.yearOfStudy, label: 'Year of study' },
-  { value: education.currentSemester, label: 'Current semester' },
-  { value: education.totalSemesters - education.currentSemester, label: 'Semesters to go' },
-  { value: education.graduation, label: 'Expected graduation' },
+  { value: archive.length, label: 'Games & apps on GitHub' },
+  { value: certificates.length, label: 'Credentials' },
+  { value: experience.filter((e) => e.kind === 'internship').length, label: 'Internship' },
+  { value: person.instruments.length, label: 'Instruments played' },
 ]
 
 export function About() {
   const facts = [
-    { icon: GraduationCap, label: 'Degree', value: `${education.degree}, ${education.branch}` },
-    { icon: BrainCircuit, label: 'Specialisation', value: education.specialization },
-    { icon: School, label: 'Institution', value: education.school },
-    { icon: BookOpen, label: 'Currently', value: `Year ${education.yearOfStudy} · Semester ${education.currentSemester}`, sub: `Graduating ${education.graduation}` },
+    { icon: GraduationCap, label: 'Education', value: `${education.degree}, ${education.branch}`, sub: `${education.school} · ${education.period}` },
+    { icon: BrainCircuit, label: 'Specialisation', value: education.specialization, sub: `Year ${education.yearOfStudy} · Semester ${education.currentSemester}` },
     { icon: MapPin, label: 'Based in', value: person.location },
+    { icon: Languages, label: 'Languages', value: person.languages.map((l) => l.name).join(' · '), sub: 'English full professional · Hindi professional working' },
+    { icon: Music, label: 'Instruments', value: person.instruments.join(' · ') },
   ]
 
   return (
@@ -41,7 +41,7 @@ export function About() {
       eyebrow="About"
       title={
         <>
-          Engineering, with a focus on <span className="text-gradient">intelligence.</span>
+          A coder who also <span className="text-gradient">plays by ear.</span>
         </>
       }
     >
@@ -49,24 +49,30 @@ export function About() {
         <div className="space-y-6 text-lg leading-[1.8] text-slate">
           <Reveal>
             <p>
-              I’m <span className="text-mist">{person.name}</span>, a third-year{' '}
-              <span className="text-mist">B.Tech student in {education.branch}</span> at{' '}
-              <span className="text-mist">{education.school}</span>.
+              I’m <span className="text-mist">{person.name}</span>, a third-year B.Tech student in{' '}
+              <span className="text-mist">{education.branch}</span> at {education.school}, specialising in{' '}
+              <span className="text-mist">{education.specialization}</span>.
             </p>
           </Reveal>
           <Reveal delay={0.05}>
             <p>
-              My specialisation is <span className="text-mist">{education.specialization}</span>, the part of computer science that teaches
-              machines to learn from data. I’m currently in my <span className="text-mist">fifth semester</span>, building the foundations
-              that the specialisation stands on.
+              I started coding in 2020 with WhiteHat Jr, where I became a <span className="text-mist">certified game and mobile-app developer</span>.
+              Since then I’ve published <span className="text-mist">{archive.length} games and apps</span> on GitHub, from physics puzzles built on
+              Matter.js to multiplayer games synced through Firebase. In 2025 I completed my{' '}
+              <span className="text-mist">first internship, in Artificial Intelligence</span>, with SmartED Innovations.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
             <p>
-              I’m based in <span className="text-mist">Siliguri, West Bengal</span>, and I’m on track to graduate in{' '}
-              <span className="text-mist">{education.graduation}</span>. Projects, experience and certifications will appear here as I add
-              them.
+              Outside the editor I’m a <span className="text-mist">multi-instrumentalist</span>. I hold Trinity College London Distinctions in
+              Electronic Keyboard, was named Music Maestro at school, and I’m a member of the Chromatix Music Club and Encoders SMIT.
             </p>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <blockquote className="flex gap-3 border-l-2 border-cyan/60 pl-4 font-display text-xl italic text-ice">
+              <Quote size={18} className="mt-1 shrink-0 text-cyan" aria-hidden />
+              {person.quote}
+            </blockquote>
           </Reveal>
 
           <Reveal delay={0.15}>
