@@ -476,12 +476,16 @@ export const certificates: Certificate[] = [
 ]
 
 /* ------------------------------------------------------------------ */
-/* Education                                                           */
+/* Education — mirrors the LinkedIn entries, with their attached media  */
 /* ------------------------------------------------------------------ */
+
+const certDoc = (id: string) => certificates.find((c) => c.id === id)!.document!
+const chromatixDoc = doc('chromatix-music-club-2024-25', 'Chromatix Music Club Member', 'Chromatix Music Club 2024-25 recruitment results announcing Anitik Aaron Maharana as a new member')
 
 export const education = {
   school: 'Sikkim Manipal Institute of Technology',
   degree: 'Bachelor of Technology (B.Tech.)',
+  linkedinDegree: 'Bachelor of Technology - BTech, Computer Science',
   branch: 'Computer Science and Engineering',
   specialization: 'Artificial Intelligence and Machine Learning',
   period: 'Jul 2024 – Jun 2028',
@@ -490,24 +494,46 @@ export const education = {
   totalSemesters: 8,
   graduation: 2028,
   activities: ['Chromatix Music Club', 'Encoders SMIT'],
+  activitiesNote: 'Member of Chromatix Music Club and Encoders SMIT',
+  docs: [
+    { ...certDoc('sigil'), title: 'Certificate of Participation' },
+    { ...certDoc('encoders-aiml'), title: 'Encoders SMIT Certification' },
+    chromatixDoc,
+  ],
   earlier: [
     {
       school: 'Sri Sri Academy, Siliguri',
-      level: 'Standard XII · CBSE',
+      level: 'Standard XII, CBSE',
       period: 'Apr 2019 – Mar 2024',
-      detail: 'Skills: Python, Communication in English. Won first place in essay writing (Class IX) and was named Music Maestro (Class XI).',
+      detail: 'Won first place in essay writing (Class IX) and was named the school’s Music Maestro (Class XI).',
+      skills: ['Communication in English', 'Python (Programming Language)', 'Music Performance'],
+      docs: [
+        { ...certDoc('sri-sri-essay'), title: 'First position in Essay Writing' },
+        { ...certDoc('sri-sri-music-maestro'), title: 'Music Maestro of School' },
+      ],
     },
     {
       school: 'WhiteHat Jr',
       level: 'Certification in Game & App Development',
       period: 'Jan 2020 – Dec 2021',
       detail: 'Debugged and built games such as Fruit Collector, Treasure Hunt, Kill the Monster, Air Balloon Ride and Kangaroo in the Jungle 2, plus apps like Shooting Range and Snowfall Animation.',
+      skills: ['JavaScript', 'Visual Studio', 'Coding'],
+      docs: [
+        { ...certDoc('whitehat-code-of-honour'), title: 'Code of Honour in Game Development' },
+        { ...certDoc('whitehat-app-developer'), title: 'Certified Mobile App Developer' },
+        { ...certDoc('whitehat-game-developer'), title: 'Certified Game Developer' },
+      ],
     },
     {
       school: 'Trinity College London',
       level: 'Music · Electronic Keyboard',
       period: 'Jan 2020 – Jun 2024',
-      detail: 'Level 1 (Grade 3) and Level 2 (Grade 5), both with Distinction. The final-level certification is in preparation.',
+      detail: 'Level 1 (Grade 3, Jan 2020 – Dec 2021) and Level 2 (Grade 5, Jul 2022 – Jun 2024), both with Distinction. The final-level certification is in preparation.',
+      skills: ['Electronic Keyboard'],
+      docs: [
+        { ...certDoc('trinity-grade-3'), title: 'Level 1 with Distinction' },
+        { ...certDoc('trinity-grade-5'), title: 'Level 2 with Distinction' },
+      ],
     },
   ],
 }
@@ -531,9 +557,7 @@ export const activities: Activity[] = [
 ]
 
 /** Membership announcement shown alongside the activities. */
-export const memberships: Doc[] = [
-  doc('chromatix-music-club-2024-25', 'Chromatix Music Club — 2024–25 recruitment result', 'Chromatix Music Club 2024-25 recruitment results announcing Anitik Aaron Maharana as a new member'),
-]
+export const memberships: Doc[] = [chromatixDoc]
 
 /* ------------------------------------------------------------------ */
 /* Currently learning & recent journey                                 */
