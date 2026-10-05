@@ -64,7 +64,7 @@ export function Contact() {
 
           <ul className="mt-10 grid gap-3 sm:grid-cols-2">
             {links.map((l) => (
-              <li key={l.kind}>
+              <li key={l.href}>
                 <a
                   href={l.href}
                   {...(l.kind === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
@@ -74,7 +74,7 @@ export function Contact() {
                     <SocialIcon kind={l.kind} className="h-5 w-5" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block font-medium text-white">{l.label}</span>
+                    <span className="block truncate font-medium text-white">{l.label}</span>
                     <span className="block truncate text-sm text-muted">{l.handle}</span>
                   </span>
                   <ArrowUpRight className="text-muted transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-cyan" size={18} aria-hidden />

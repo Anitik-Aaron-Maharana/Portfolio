@@ -208,7 +208,7 @@ export function Hero() {
               <div className="flex items-center gap-2 sm:ml-2">
                 {social.map((s) => (
                   <a
-                    key={s.kind}
+                    key={s.href}
                     href={s.href}
                     {...(s.kind === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
                     aria-label={s.kind === 'email' ? `Email ${s.handle}` : `${s.label} (opens in new tab)`}

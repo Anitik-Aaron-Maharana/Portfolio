@@ -18,6 +18,8 @@ export type Source = 'profile' | 'activity' | 'certificate' | 'github'
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/anitikaaronmaharana/'
 export const GITHUB_USER = 'anitikaaronmaharana'
 export const GITHUB_URL = `https://github.com/${GITHUB_USER}`
+export const GITHUB_USER_2 = 'Anitik-Aaron-Maharana'
+export const GITHUB_URL_2 = `https://github.com/${GITHUB_USER_2}`
 export const YOUTUBE_URL = 'https://youtube.com/AnitikAaronMaharana'
 export const INSTAGRAM_URL = 'https://www.instagram.com/anitikaaronmaharana'
 export const EMAIL = 'anitikamaharana@gmail.com'
@@ -68,7 +70,8 @@ export const person = {
 export type LinkKind = 'linkedin' | 'github' | 'email' | 'instagram' | 'phone' | 'youtube'
 export const links: { label: string; href: string; kind: LinkKind; handle: string }[] = [
   { label: 'LinkedIn', href: LINKEDIN_URL, kind: 'linkedin', handle: 'anitikaaronmaharana' },
-  { label: 'GitHub', href: GITHUB_URL, kind: 'github', handle: GITHUB_USER },
+  { label: 'GitHub · Games', href: GITHUB_URL, kind: 'github', handle: GITHUB_USER },
+  { label: 'GitHub · Portfolio', href: GITHUB_URL_2, kind: 'github', handle: GITHUB_USER_2 },
   { label: 'Email', href: `mailto:${EMAIL}`, kind: 'email', handle: EMAIL },
   { label: 'YouTube', href: YOUTUBE_URL, kind: 'youtube', handle: 'AnitikAaronMaharana' },
   { label: 'Instagram', href: INSTAGRAM_URL, kind: 'instagram', handle: '@anitikaaronmaharana' },
