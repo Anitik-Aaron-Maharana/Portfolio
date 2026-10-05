@@ -19,6 +19,7 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/anitikaaronmaharana/'
 export const GITHUB_USER = 'anitikaaronmaharana'
 export const GITHUB_URL = `https://github.com/${GITHUB_USER}`
 export const YOUTUBE_URL = 'https://youtube.com/AnitikAaronMaharana'
+export const INSTAGRAM_URL = 'https://www.instagram.com/anitikaaronmaharana'
 export const EMAIL = 'anitikamaharana@gmail.com'
 export const PHONE = '+91 6295 350 033'
 /** Publishing a phone number on a public site invites spam calls. Flip to true to show it in Contact. */
@@ -70,6 +71,7 @@ export const links: { label: string; href: string; kind: LinkKind; handle: strin
   { label: 'GitHub', href: GITHUB_URL, kind: 'github', handle: GITHUB_USER },
   { label: 'Email', href: `mailto:${EMAIL}`, kind: 'email', handle: EMAIL },
   { label: 'YouTube', href: YOUTUBE_URL, kind: 'youtube', handle: 'AnitikAaronMaharana' },
+  { label: 'Instagram', href: INSTAGRAM_URL, kind: 'instagram', handle: '@anitikaaronmaharana' },
   ...(SHOW_PHONE ? [{ label: 'Phone', href: `tel:${PHONE.replace(/\s/g, '')}`, kind: 'phone' as const, handle: PHONE }] : []),
 ]
 
